@@ -16,33 +16,35 @@
     <div class="chooseBox gifted">
         <img src="images/gift0.png" alt=""/>
     </div>
-    <div class="chooseBox ungifted">
+    <div class="chooseBox ">
         <img src="images/gift1.png" alt=""/>
     </div>
-    <div class="chooseBox ungifted">
+    <div class="chooseBox ">
         <img src="images/gift2.png" alt=""/>
     </div>
-    <div class="chooseBox ungifted">
+    <div class="chooseBox ">
         <img src="images/gift3.png" alt=""/>
     </div>
-
-    <div class="start">
-        <a></a>
+    <div class="chooseBox ">
+        //empty
     </div>
-
-    <div class="chooseBox ungifted">
+    <div class="chooseBox ">
         <img src="images/gift4.png" alt=""/>
     </div>
-    <div class="chooseBox ungifted">
+    <div class="chooseBox ">
         <img src="images/gift5.png" alt=""/>
     </div>
-    <div class="chooseBox ungifted">
+    <div class="chooseBox ">
         <img src="images/gift6.png" alt=""/>
     </div>
-    <div class="chooseBox ungifted">
+    <div class="chooseBox ">
         <img src="images/gift7.png" alt=""/>
     </div>
 </div>
+
+ <div class="start">
+        <a></a>
+ </div>
 ```
 说明：
 1. .lottery-content是外部父元素包裹抽奖选项
