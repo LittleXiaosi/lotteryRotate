@@ -3,7 +3,7 @@
  * 使用demo
  *
  */
-(function($) {
+(function ($) {
     var defaults = {
         rowNumber: 3,
         columnNumber: 3,
@@ -18,13 +18,13 @@
         beChangedCLassName: [],
         endNumber: NaN,
         nowChooseDom: undefined,
-        endCallBack: function() {
+        endCallBack: function () {
             if (window.console) {
                 console.log("endCallBack回调函数是空的");
             }
         },
         //function:init----用于初始化页面
-        init: function($dom) {
+        init: function ($dom) {
             if (this.rowNumber < 3 || this.columnNumber < 3) {
                 if (window.console) {
                     console.log("本插件需要至少3*3的选择框才能运行");
@@ -128,32 +128,22 @@
         //初始化页面，生成旋转元素 end
 
         //旋转实现 begin
-        var beChangedClassName = that.opts.beChangedCLassName;
         var onChangeClassName = that.opts.onChangeClassName;
 
         //定义抽奖旋转函数
-        that.rotation = function(index) {
-            if (beChangedClassName.length == onChangeClassName.length && beChangedClassName.length > 0) {
-                var classNameLength = beChangedClassName.length;
-                var nextDom = $this.children().filter("[data-index='" + index + "']");
-
+        that.rotation = function (index) {
+            if (typeof onChangeClassName == 'string') {
+                var $nextDom = $this.children().filter("[data-index='" + index + "']");
+                $this.children().removeClass(onChangeClassName);
+                $nextDom.addClass(onChangeClassName);
+            } else if (onChangeClassName.constructor.name == 'Array' && onChangeClassName.length > 0) {
+                var classNameLength = onChangeClassName.length;
+                var $nextDom = $this.children().filter("[data-index='" + index + "']");
                 for (var i = 0; i < classNameLength; i++) {
                     $this.children().removeClass(onChangeClassName[i]);
                 }
-                for (var i = 0; i < classNameLength; i++) {
-                    if (nextDom.hasClass(beChangedClassName[i])) {
-                        nextDom.addClass(onChangeClassName[i]);
-                    }
-                }
-                $this.children().filter("[data-index='" + index + "']").addClass(onChangeClassName[i]);
+                $nextDom.addClass(onChangeClassName[index % classNameLength]);
 
-            } else if (typeof beChangedClassName == 'string' && typeof onChangeClassName == 'string') {
-                var nextDom = $this.children().filter("[data-index='" + index + "']");
-                $this.children().removeClass(onChangeClassName);
-                if (nextDom.hasClass(beChangedClassName)) {
-                    nextDom.addClass(onChangeClassName);
-                }
-                $this.children().filter("[data-index='" + index + "']").addClass(onChangeClassName);
             } else {
                 if (window.console) {
                     console.log("错误：beChangedClassName数组长度应该要等于onChangeClassName长度");
@@ -162,7 +152,7 @@
         }
 
         //开始抽奖旋转函数
-        that.startRotat = function() {
+        that.startRotat = function () {
             //console.log(that.opts);  测试时候调用
             //开始匀速旋转，抽奖起始阶段
 
@@ -177,20 +167,20 @@
                 that.endRotat(endNumber);
             } else {
                 clearTimeout(that.opts.interval_start);
-                that.opts.interval_start = setTimeout(function() {
+                that.opts.interval_start = setTimeout(function () {
                     that.startRotat();
                 }, that.opts.rotatTime);
             }
         }
 
         //结束抽奖旋转函数
-        that.endRotat = function(endNumber) {
+        that.endRotat = function (endNumber) {
             if (that.opts.nowIndex < (endNumber + rotatCount)) {
                 //                    alert("that.opts.nowIndex:" + that.opts.nowIndex + "endNumber:" + endNumber);       //调试时使用
                 that.opts.rotatTime = that.opts.rotatTime + 50;
                 that.opts.nowIndex = ++that.opts.nowIndex;
                 that.rotation((that.opts.nowIndex % rotatCount));
-                that.opts.interval_end = window.setTimeout(function() {
+                that.opts.interval_end = window.setTimeout(function () {
                     that.endRotat(endNumber);
                 }, that.opts.rotatTime);
             } else {
@@ -203,13 +193,13 @@
         //旋转实现 end
 
         //结束抽奖时候调用的函数
-        that.set_endNumber = function(endNumber) {
+        that.set_endNumber = function (endNumber) {
             that.opts.endNumber = endNumber;
             that.opts.nowChooseDom = $dom.children().filter('[data-index="' + endNumber + '"]');
             return that.opts.nowChooseDom;
         }
         //开启抽奖时候调用函数
-        that.startNewRotate = function() {
+        that.startNewRotate = function () {
             if (!$.fn.lotteryRotate.onRotate) {
 
                 $.fn.lotteryRotate.onRotate = true;
@@ -231,7 +221,7 @@
         }
     }
 
-    $.fn.lotteryRotate = function(options) {
+    $.fn.lotteryRotate = function (options) {
 
         var newRotateBox = new lotteryRotateFunction($(this), options);//实例化的新插件对象
         //点击开始抽奖
