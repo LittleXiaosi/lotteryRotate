@@ -48,9 +48,9 @@
 ```
 说明：
 1. .lottery-content是外部父元素包裹抽奖选项
-2. .ungifted 是未中奖样式，用于切换
-3. .gifted是中奖了的样式，用于切换
-4. .chooseBox是基本样式
+2. .gifted是中奖了的样式，用于切换
+3. .chooseBox是基本样式
+4. 选中状态是直接添加.gifted样式，权重在css中处理
 
 ## CSS要求
 1. css自定义实现抽奖框排布换行，插件内不做处理
@@ -61,8 +61,8 @@
  window.rotateBox = $('.lottery-content').lotteryRotate({
      rowNumber: 3,                      //行数
      columnNumber: 3,                   //列数
-     onChangeClassName: "gifted",       //选中状态的class
-     beChangedCLassName: "ungifted",    //未选中状态的class
+     onChangeClassName: "gifted",       //写法1：选中状态的class统一名字
+     onChangeClassName:  ['gifted1', 'gifted2', 'gifted3'],       //写法2：选中状态的class不同名字为顺时针
      staticRotatTime: 100,              //旋转速度控制
      endCallBack: function(endNumber) { //抽完奖之后的回调函数
          var $endDom = $('[data-index="' + endNumber + '"]');
