@@ -13,10 +13,10 @@
 
 ```html
 <div class="lottery-content">
-    <div class="chooseBox gifted">
+    <div class="chooseBox gifted">      <!--这是该奖品的选中状态，比未选中状态多一个gifted-->
         <img src="images/gift0.png" alt=""/>
     </div>
-    <div class="chooseBox ">
+    <div class="chooseBox ">            <!--这是该奖品的未选中状态-->
         <img src="images/gift1.png" alt=""/>
     </div>
     <div class="chooseBox ">
